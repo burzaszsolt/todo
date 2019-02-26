@@ -1,2 +1,2 @@
-import todos from "./todoReducer"
-export default todos
+import todos from "./todo";
+export default todos;
