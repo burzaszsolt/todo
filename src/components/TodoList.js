@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 import { updateTodo } from "../actions/actionCreaters";
+import { getFilteredTodos } from "../selectors";
 
 class TodoList extends React.PureComponent {
   static propTypes = {
@@ -17,6 +18,16 @@ class TodoList extends React.PureComponent {
     updateTodo: PropTypes.func.isRequired
   };
 
+  state = {
+    term: ""
+  };
+
+  handleChange = evt => {
+    this.setState({
+      term: evt.target.value
+    });
+  };
+
   handleUpdate = id => {
     this.props.updateTodo(id);
     toast("Completed!", {
@@ -26,6 +37,7 @@ class TodoList extends React.PureComponent {
   };
 
   render() {
+    const displayedTodos = getFilteredTodos(this.props.todos, this.state.term);
     const todoListStyle = {
       marginLeft: "auto",
       marginRight: "auto"
@@ -35,8 +47,17 @@ class TodoList extends React.PureComponent {
       <div className="container mt-2">
         <h2>Todo list</h2>
         <div className="col-4" style={todoListStyle}>
-          {this.props.todos.length ? (
-            this.props.todos.map(todo => (
+          <form>
+            <input
+              className="form-control"
+              type="text"
+              onChange={this.handleChange}
+              placeholder="Search"
+              value={this.state.value}
+            />
+          </form>
+          {displayedTodos.length ? (
+            displayedTodos.map(todo => (
               <TodoItem
                 key={todo.id}
                 {...todo}
@@ -52,7 +73,7 @@ class TodoList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
     todos: state
   };

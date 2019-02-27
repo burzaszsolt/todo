@@ -15,7 +15,7 @@ class TableHeader extends React.PureComponent {
     value: ""
   };
 
-  onChangeHandler = evt => {
+  handleChange = evt => {
     this.setState({ value: evt.target.value });
   };
 
@@ -61,7 +61,7 @@ class TableHeader extends React.PureComponent {
               className="form-control"
               type="text"
               aria-describedby="add-button-addon"
-              onChange={this.onChangeHandler}
+              onChange={this.handleChange}
               placeholder="Name"
               value={this.state.value}
             />

@@ -11,3 +11,8 @@ export const getUncompletedTodosCount = createSelector(
     return all - completed;
   }
 );
+
+export const getSearchTerm = state => state.term;
+
+export const getFilteredTodos = (todos, term) =>
+  todos.filter(todo => todo.name.includes(term));
