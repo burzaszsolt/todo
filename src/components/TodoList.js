@@ -48,13 +48,15 @@ class TodoList extends React.PureComponent {
         <h2>Todo list</h2>
         <div className="col-4" style={todoListStyle}>
           <form>
-            <input
-              className="form-control"
-              type="text"
-              onChange={this.handleChange}
-              placeholder="Search"
-              value={this.state.value}
-            />
+            <div className="col-12">
+              <input
+                className="form-control"
+                type="text"
+                onChange={this.handleChange}
+                placeholder="Search"
+                value={this.state.value}
+              />
+            </div>
           </form>
           {displayedTodos.length ? (
             displayedTodos.map(todo => (
