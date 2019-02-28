@@ -23,7 +23,7 @@ export default class TodoItem extends React.PureComponent {
     this.setState({ name: evt.target.value });
   };
 
-  handleClick = evt => {
+  handleClick = () => {
     this.setState({ editing: !this.state.editing });
   };
 
