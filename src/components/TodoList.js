@@ -31,7 +31,7 @@ class TodoList extends React.PureComponent {
   handleNameUpdate = (id, name) => {
     this.props.updateTodoName(id, name);
     toast("Updated!", {
-      toastId: 8,
+      toastId: 7,
       type: toast.TYPE.SUCCESS
     });
   };

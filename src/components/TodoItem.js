@@ -93,7 +93,10 @@ export default class TodoItem extends React.PureComponent {
           type="checkbox"
           style={this.checkBoxStyle}
         />
-        <label onClick={this.handleClick} className="col-9">
+        <label
+          onClick={this.handleClick}
+          className={this.props.completed ? "todo-completed col-9" : "col-9"}
+        >
           {this.props.name}
         </label>
       </div>
