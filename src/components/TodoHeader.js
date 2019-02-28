@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { addTodo, clearTodos } from "../actions/actionCreaters";
 import { getCompletedTodosCount } from "../selectors";
 
-class TableHeader extends React.PureComponent {
+class TodoHeader extends React.PureComponent {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
     clearTodos: PropTypes.func.isRequired
@@ -19,37 +19,35 @@ class TableHeader extends React.PureComponent {
     this.setState({ value: evt.target.value });
   };
 
-  addClickHandler = () => {
+  handleClick = () => {
     if (!this.state.value.length) {
       toast("Name cannot be empty!", {
         toastId: 2,
         type: toast.TYPE.ERROR
       });
       return;
-    } else {
-      this.props.addTodo(this.state.value);
-      this.setState({ value: "" });
-      toast("TODO created!", {
-        toastId: 1,
-        type: toast.TYPE.SUCCESS
-      });
     }
+    this.props.addTodo(this.state.value);
+    this.setState({ value: "" });
+    toast("TODO created!", {
+      toastId: 1,
+      type: toast.TYPE.SUCCESS
+    });
   };
 
-  clearClickHandler = () => {
+  handleClear = () => {
     if (!this.props.completedTodosCount) {
       toast("There aren't any completed todos, nothing to clear!", {
         toastId: 5,
         type: toast.TYPE.WARNING
       });
       return;
-    } else {
-      this.props.clearTodos();
-      toast("Completed todos cleared", {
-        toastId: 6,
-        type: toast.TYPE.SUCCESS
-      });
     }
+    this.props.clearTodos();
+    toast("Completed todos cleared", {
+      toastId: 6,
+      type: toast.TYPE.SUCCESS
+    });
   };
 
   render() {
@@ -70,7 +68,7 @@ class TableHeader extends React.PureComponent {
                 id="add-button-addon"
                 className="btn btn-primary"
                 type="button"
-                onClick={this.addClickHandler}
+                onClick={this.handleClick}
               >
                 Add
               </button>
@@ -78,7 +76,7 @@ class TableHeader extends React.PureComponent {
             <button
               className="btn btn-danger ml-2"
               type="button"
-              onClick={this.clearClickHandler}
+              onClick={this.handleClear}
             >
               Clear
             </button>
@@ -98,9 +96,7 @@ const mapDispatchToProps = {
   clearTodos
 };
 
-const TodoHeaderContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TableHeader);
-
-export default TodoHeaderContainer;
+)(TodoHeader);

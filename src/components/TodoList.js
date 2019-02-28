@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
-import { updateTodo } from "../actions/actionCreaters";
-import { getFilteredTodos } from "../selectors";
+import TodoSearch from "./TodoSearch";
+import { updateTodoCompleted, updateTodoName } from "../actions/actionCreaters";
+import { filterTodos } from "../selectors";
 
 class TodoList extends React.PureComponent {
   static propTypes = {
@@ -15,29 +16,27 @@ class TodoList extends React.PureComponent {
         name: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
-    updateTodo: PropTypes.func.isRequired
+    updateTodoCompleted: PropTypes.func.isRequired,
+    updateTodoName: PropTypes.func.isRequired
   };
 
-  state = {
-    term: ""
-  };
-
-  handleChange = evt => {
-    this.setState({
-      term: evt.target.value
-    });
-  };
-
-  handleUpdate = id => {
-    this.props.updateTodo(id);
+  handleCompletedUpdate = id => {
+    this.props.updateTodoCompleted(id);
     toast("Completed!", {
       toastId: 3,
       type: toast.TYPE.SUCCESS
     });
   };
 
+  handleNameUpdate = (id, name) => {
+    this.props.updateTodoName(id, name);
+    toast("Updated!", {
+      toastId: 8,
+      type: toast.TYPE.SUCCESS
+    });
+  };
+
   render() {
-    const displayedTodos = getFilteredTodos(this.props.todos, this.state.term);
     const todoListStyle = {
       marginLeft: "auto",
       marginRight: "auto"
@@ -47,23 +46,14 @@ class TodoList extends React.PureComponent {
       <div className="container mt-2">
         <h2>Todo list</h2>
         <div className="col-4" style={todoListStyle}>
-          <form>
-            <div className="col-12">
-              <input
-                className="form-control"
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Search"
-                value={this.state.value}
-              />
-            </div>
-          </form>
-          {displayedTodos.length ? (
-            displayedTodos.map(todo => (
+          <TodoSearch />
+          {this.props.todos.length ? (
+            this.props.todos.map(todo => (
               <TodoItem
                 key={todo.id}
                 {...todo}
-                updateTodo={() => this.handleUpdate(todo.id)}
+                onUpdateTodoCompleted={this.handleCompletedUpdate}
+                onUpdateTodoName={this.handleNameUpdate}
               />
             ))
           ) : (
@@ -75,19 +65,16 @@ class TodoList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    todos: state
-  };
-};
+const mapStateToProps = state => ({
+  todos: filterTodos(state)
+});
 
 const mapDispatchToProps = {
-  updateTodo
+  updateTodoCompleted,
+  updateTodoName
 };
 
-const TodoContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(TodoList);
-
-export default TodoContainer;

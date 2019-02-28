@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
 
-export const getTodos = state => state;
-export const getTodosCount = state => state.length;
+export const getTodos = state => state.todos;
+export const getTodosCount = state => state.todos.length;
 export const getCompletedTodosCount = state =>
-  state.filter(todo => todo.completed).length;
+  state.todos.filter(todo => todo.completed).length;
 export const getUncompletedTodosCount = createSelector(
   getTodosCount,
   getCompletedTodosCount,
@@ -11,5 +11,5 @@ export const getUncompletedTodosCount = createSelector(
     return all - completed;
   }
 );
-export const getFilteredTodos = (todos, term) =>
-  todos.filter(todo => todo.name.includes(term));
+export const filterTodos = state =>
+  state.todos.filter(todo => todo.name.includes(state.search));

@@ -7,18 +7,10 @@ import {
   getUncompletedTodosCount
 } from "../selectors";
 
-class TableFooter extends React.PureComponent {
+class TodoFooter extends React.PureComponent {
   static propTypes = {
     completed: PropTypes.number.isRequired,
     all: PropTypes.number.isRequired
-  };
-
-  state = {
-    value: ""
-  };
-
-  onChangeHandler = evt => {
-    this.setState({ value: evt.target.value });
   };
 
   render() {
@@ -47,5 +39,4 @@ const mapStateToProps = state => {
   };
 };
 
-const TodoFooterContainer = connect(mapStateToProps)(TableFooter);
-export default TodoFooterContainer;
+export default connect(mapStateToProps)(TodoFooter);
