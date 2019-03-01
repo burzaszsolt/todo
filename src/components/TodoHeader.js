@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { addTodo, clearTodos } from "../actions/actionCreaters";
+import { addTodo } from "../actions/thunks";
+import { clearTodos } from "../actions/actionCreaters";
 import { getCompletedTodosCount } from "../selectors";
 
 class TodoHeader extends React.PureComponent {

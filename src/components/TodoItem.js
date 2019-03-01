@@ -10,6 +10,10 @@ export default class TodoItem extends React.PureComponent {
     name: PropTypes.string.isRequired
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ name: nextProps.name });
+  }
+
   state = {
     name: this.props.name,
     editing: false
@@ -33,25 +37,43 @@ export default class TodoItem extends React.PureComponent {
   };
 
   handleBlur = evt => {
-    if (
-      evt.relatedTarget ===
-      document.getElementById(`save-button-addon-${this.props.id}`)
-    ) {
+    if (evt.relatedTarget === this.saveButton) {
       return;
     }
-    this.setState({ editing: !this.state.editing });
+    this.setState({ name: this.props.name, editing: !this.state.editing });
   };
 
   checkBoxStyle = {
     marginTop: "7.5px"
   };
 
+  renderItem() {
+    return (
+      <div className="row">
+        <input
+          className="form-control form-control-sm col-3"
+          name={this.state.name}
+          onChange={this.handleCompletedChange}
+          checked={this.props.completed}
+          type="checkbox"
+          style={this.checkBoxStyle}
+        />
+        <label
+          onClick={this.handleClick}
+          className={this.props.completed ? "todo-completed col-9" : "col-9"}
+        >
+          {this.state.name}
+        </label>
+      </div>
+    );
+  }
+
   renderEditableItem() {
     return (
       <div className="row">
         <input
           className="form-control form-control-sm col-3"
-          name={this.props.name}
+          name={this.state.name}
           onChange={this.handleCompletedChange}
           checked={this.props.completed}
           type="checkbox"
@@ -72,33 +94,13 @@ export default class TodoItem extends React.PureComponent {
               id={`save-button-addon-${this.props.id}`}
               className="btn btn-primary"
               type="button"
+              ref={node => (this.saveButton = node)}
               onClick={this.handleSaveClick}
             >
               Save
             </button>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  renderItem() {
-    return (
-      <div className="row">
-        <input
-          className="form-control form-control-sm col-3"
-          name={this.props.name}
-          onChange={this.handleCompletedChange}
-          checked={this.props.completed}
-          type="checkbox"
-          style={this.checkBoxStyle}
-        />
-        <label
-          onClick={this.handleClick}
-          className={this.props.completed ? "todo-completed col-9" : "col-9"}
-        >
-          {this.props.name}
-        </label>
       </div>
     );
   }

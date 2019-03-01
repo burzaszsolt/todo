@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 import TodoSearch from "./TodoSearch";
-import { updateTodoCompleted, updateTodoName } from "../actions/actionCreaters";
+import {
+  getTodos,
+  updateTodoCompleted,
+  updateTodoName
+} from "../actions/thunks";
 import { filterTodos } from "../selectors";
 
 class TodoList extends React.PureComponent {
@@ -19,6 +23,10 @@ class TodoList extends React.PureComponent {
     updateTodoCompleted: PropTypes.func.isRequired,
     updateTodoName: PropTypes.func.isRequired
   };
+
+  componentDidMount() {
+    this.props.getTodos();
+  }
 
   handleCompletedUpdate = id => {
     this.props.updateTodoCompleted(id);
@@ -70,6 +78,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  getTodos,
   updateTodoCompleted,
   updateTodoName
 };

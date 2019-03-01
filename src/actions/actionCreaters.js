@@ -1,4 +1,5 @@
 import {
+  GET_TODOS,
   ADD_TODO,
   UPDATE_TODO_NAME,
   UPDATE_TODO_COMPLETED,
@@ -6,11 +7,20 @@ import {
   SEARCH_TODO
 } from "./actionNames";
 
+export function getTodos(todos) {
+  return {
+    type: GET_TODOS,
+    payload: {
+      todos
+    }
+  };
+}
+
 export function addTodo(name) {
   return {
     type: ADD_TODO,
     payload: {
-      name: name
+      name
     }
   };
 }
@@ -19,7 +29,7 @@ export function updateTodoCompleted(id) {
   return {
     type: UPDATE_TODO_COMPLETED,
     payload: {
-      id: id
+      id
     }
   };
 }

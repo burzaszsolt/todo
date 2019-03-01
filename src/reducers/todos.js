@@ -1,4 +1,5 @@
 import {
+  GET_TODOS,
   ADD_TODO,
   UPDATE_TODO_COMPLETED,
   UPDATE_TODO_NAME,
@@ -7,6 +8,9 @@ import {
 
 export default function reducer(state = [], action) {
   switch (action.type) {
+    case GET_TODOS: {
+      return action.payload.todos;
+    }
     case ADD_TODO: {
       const lastId = state.reduce((max, todo) => {
         return todo.id > max ? todo.id : max;
