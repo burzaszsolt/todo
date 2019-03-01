@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { searchTodo } from "../actions/actionCreaters";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { searchTodo } from '../actions/actionCreaters';
 
 class TodoSearch extends React.PureComponent {
   static propTypes = {
@@ -9,12 +9,7 @@ class TodoSearch extends React.PureComponent {
     searchTodo: PropTypes.func.isRequired
   };
 
-  state = {
-    search: this.props.search
-  };
-
   handleChange = evt => {
-    this.setState({ search: evt.target.value });
     this.props.searchTodo(evt.target.value);
   };
   render() {
@@ -26,7 +21,7 @@ class TodoSearch extends React.PureComponent {
             type="text"
             onChange={this.handleChange}
             placeholder="Search"
-            value={this.state.search}
+            value={this.props.search}
           />
         </div>
       </form>
