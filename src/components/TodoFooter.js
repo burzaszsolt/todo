@@ -14,18 +14,15 @@ class TodoFooter extends React.PureComponent {
   };
 
   render() {
-    const pStyle = {
-      marginLeft: "10px"
-    };
     return (
-      <div>
-        <form>
-          <div className="row">
-            <p>All: {this.props.all}</p>
-            <p style={pStyle}>Completed: {this.props.completed}</p>
-            <p style={pStyle}>Uncompleted: {this.props.uncompleted}</p>
-          </div>
-        </form>
+      <div className="row">
+        <p className="col-sm-12 col-md-12 col-lg-4">All: {this.props.all}</p>
+        <p className="col-sm-12 col-md-12 col-lg-4">
+          Completed: {this.props.completed}
+        </p>
+        <p className="col-sm-12 col-md-12 col-lg-4">
+          Uncompleted: {this.props.uncompleted}
+        </p>
       </div>
     );
   }

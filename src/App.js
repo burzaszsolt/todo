@@ -6,14 +6,11 @@ import TodoList from "./components/TodoList";
 import { ToastContainer } from "react-toastify";
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <h1>Todo app</h1>
-      <TodoHeader />
-      <TodoList />
-      <TodoFooter />
-      <ToastContainer />
-    </header>
+  <div className="col-6 todos">
+    <TodoHeader />
+    <TodoList />
+    <TodoFooter />
+    <ToastContainer />
   </div>
 );
 

@@ -45,29 +45,22 @@ class TodoList extends React.PureComponent {
   };
 
   render() {
-    const todoListStyle = {
-      marginLeft: "auto",
-      marginRight: "auto"
-    };
-
     return (
-      <div className="container mt-2">
+      <div>
         <h2>Todo list</h2>
-        <div className="col-4" style={todoListStyle}>
-          <TodoSearch />
-          {this.props.todos.length ? (
-            this.props.todos.map(todo => (
-              <TodoItem
-                key={todo.id}
-                {...todo}
-                onUpdateTodoCompleted={this.handleCompletedUpdate}
-                onUpdateTodoName={this.handleNameUpdate}
-              />
-            ))
-          ) : (
-            <p>Nothing to do</p>
-          )}
-        </div>
+        <TodoSearch />
+        {this.props.todos.length ? (
+          this.props.todos.map(todo => (
+            <TodoItem
+              key={todo.id}
+              {...todo}
+              onUpdateTodoCompleted={this.handleCompletedUpdate}
+              onUpdateTodoName={this.handleNameUpdate}
+            />
+          ))
+        ) : (
+          <p>Nothing to do</p>
+        )}
       </div>
     );
   }

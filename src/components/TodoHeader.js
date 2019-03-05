@@ -53,36 +53,32 @@ class TodoHeader extends React.PureComponent {
 
   render() {
     return (
-      <div>
-        <form>
-          <div className="input-group">
-            <input
-              className="form-control"
-              type="text"
-              aria-describedby="add-button-addon"
-              onChange={this.handleChange}
-              placeholder="Name"
-              value={this.state.value}
-            />
-            <div className="input-group-append">
-              <button
-                id="add-button-addon"
-                className="btn btn-primary"
-                type="button"
-                onClick={this.handleClick}
-              >
-                Add
-              </button>
-            </div>
-            <button
-              className="btn btn-danger ml-2"
-              type="button"
-              onClick={this.handleClear}
-            >
-              Clear
-            </button>
-          </div>
-        </form>
+      <div className="input-group">
+        <input
+          className="form-control"
+          type="text"
+          aria-describedby="add-button-addon"
+          onChange={this.handleChange}
+          placeholder="Name"
+          value={this.state.value}
+        />
+        <div className="input-group-append">
+          <button
+            id="add-button-addon"
+            className="btn btn-primary"
+            type="button"
+            onClick={this.handleClick}
+          >
+            Add
+          </button>
+        </div>
+        <button
+          className="btn btn-danger ml-2"
+          type="button"
+          onClick={this.handleClear}
+        >
+          Clear
+        </button>
       </div>
     );
   }
