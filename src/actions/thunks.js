@@ -28,3 +28,8 @@ export const updateTodoName = (id, name) => (
   dispatch(actions.updateTodoName(id, name));
   localStorageApi.setTodos(selectors.getTodos(getState()));
 };
+
+export const clearTodos = name => (dispatch, getState, { localStorageApi }) => {
+  dispatch(actions.clearTodos());
+  localStorageApi.setTodos(selectors.getTodos(getState()));
+};
