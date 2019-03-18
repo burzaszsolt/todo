@@ -8,27 +8,57 @@ describe("reducers", () => {
       expect(nextState).toEqual({ search: "", todos: [] });
     });
 
-    test("get todos", () => {
+    test("resolve todos", () => {
       const state = {
         search: "",
         todos: [
-          { id: 0, name: "a", completed: true },
-          { id: 1, name: "b", completed: false }
+          { id: "0", name: "a", completed: true },
+          { id: "1", name: "b", completed: false }
         ]
       };
 
-      const nextState = reducer(state, actions.getTodos(state.todos));
+      const nextState = reducer(state, actions.resolveTodos(state.todos));
       expect(nextState.todos).toHaveLength(2);
       expect(nextState.todos).toContainEqual(...state.todos);
     });
 
-    test("add todo", () => {
+    test("resolve todo", () => {
       const state = { search: "", todos: [] };
-      const nextState = reducer(state, actions.addTodo("a"));
+      const nextState = reducer(
+        state,
+        actions.resolveTodo({ id: "0", name: "a", completed: false })
+      );
       expect(nextState.todos).toHaveLength(1);
       expect(nextState.todos).toContainEqual({
-        id: 0,
+        id: "0",
         name: "a",
+        completed: false
+      });
+    });
+
+    test("update todo name", () => {
+      const state = {
+        search: "",
+        todos: [
+          {
+            id: "0",
+            name: "a",
+            completed: false
+          }
+        ]
+      };
+      const nextState = reducer(
+        state,
+        actions.resolveTodo({
+          id: "0",
+          name: "b",
+          completed: false
+        })
+      );
+      expect(nextState.todos).toHaveLength(1);
+      expect(nextState.todos).toContainEqual({
+        id: "0",
+        name: "b",
         completed: false
       });
     });
@@ -38,38 +68,25 @@ describe("reducers", () => {
         search: "",
         todos: [
           {
-            id: 0,
+            id: "0",
             name: "a",
             completed: false
           }
         ]
       };
-      const nextState = reducer(state, actions.updateTodoCompleted(0));
+      const nextState = reducer(
+        state,
+        actions.resolveTodo({
+          id: "0",
+          name: "a",
+          completed: true
+        })
+      );
       expect(nextState.todos).toHaveLength(1);
       expect(nextState.todos).toContainEqual({
-        id: 0,
+        id: "0",
         name: "a",
         completed: true
-      });
-    });
-
-    test("update todo name", () => {
-      const state = {
-        search: "",
-        todos: [
-          {
-            id: 0,
-            name: "a",
-            completed: false
-          }
-        ]
-      };
-      const nextState = reducer(state, actions.updateTodoName(0, "b"));
-      expect(nextState.todos).toHaveLength(1);
-      expect(nextState.todos).toContainEqual({
-        id: 0,
-        name: "b",
-        completed: false
       });
     });
 
@@ -78,17 +95,17 @@ describe("reducers", () => {
         search: "",
         todos: [
           {
-            id: 0,
+            id: "0",
             name: "a",
             completed: true
           },
           {
-            id: 1,
+            id: "1",
             name: "b",
             completed: false
           },
           {
-            id: 2,
+            id: "2",
             name: "c",
             completed: true
           }
@@ -97,10 +114,55 @@ describe("reducers", () => {
       const nextState = reducer(state, actions.clearTodos());
       expect(nextState.todos).toHaveLength(1);
       expect(nextState.todos).toContainEqual({
-        id: 1,
+        id: "1",
         name: "b",
         completed: false
       });
+    });
+
+    test("delete todo", () => {
+      const state = {
+        todos: [
+          {
+            id: "1",
+            name: "a",
+            completed: false
+          },
+          {
+            id: "2",
+            name: "b",
+            completed: false
+          }
+        ],
+        search: ""
+      };
+      const nextState = reducer(state, actions.deleteTodo("1"));
+      expect(nextState.todos).toHaveLength(1);
+      expect(nextState.todos).toContainEqual({
+        id: "2",
+        name: "b",
+        completed: false
+      });
+    });
+
+    test("delete todo", () => {
+      const state = {
+        todos: [
+          {
+            id: "1",
+            name: "a",
+            completed: false
+          },
+          {
+            id: "2",
+            name: "b",
+            completed: false
+          }
+        ],
+        search: ""
+      };
+      const nextState = reducer(state, actions.deleteAllTodos());
+      expect(nextState.todos).toHaveLength(0);
     });
   });
 

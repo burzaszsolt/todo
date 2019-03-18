@@ -17,10 +17,26 @@ describe("thunks", () => {
   });
 
   describe("setInitialState", () => {
-    test("it resolves todos from local storage", () => {
+    // test("it resolves todos from local storage", () => {
+    //   const todos = [
+    //     { id: "1", name: "a", completed: false },
+    //     { id: "2", name: "b", completed: true }
+    //   ];
+
+    //   localStorageApi.getTodos.mockReturnValue(todos);
+    //   thunks.getTodos()(dispatch, getState, { localStorageApi });
+    //   expect(localStorageApi.getTodos).toHaveBeenCalledTimes(1);
+    //   expect(localStorageApi.getTodos).toHaveBeenNthCalledWith(1);
+    //   expect(dispatch).toHaveBeenCalledWith({
+    //     type: actions.GET_TODOS,
+    //     payload: { todos }
+    //   });
+    // });
+
+    test("it resolves todos from api", () => {
       const todos = [
-        { id: 1, name: "a", completed: false },
-        { id: 2, name: "b", completed: true }
+        { id: "1", name: "a", completed: false },
+        { id: "2", name: "b", completed: true }
       ];
 
       localStorageApi.getTodos.mockReturnValue(todos);

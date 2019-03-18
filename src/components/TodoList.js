@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 import TodoSearch from "./TodoSearch";
 import {
   getTodos,
   updateTodoCompleted,
-  updateTodoName
+  updateTodoName,
+  deleteTodo
 } from "../actions/thunks";
 import { filterTodos } from "../selectors";
 
@@ -15,33 +15,30 @@ class TodoList extends React.PureComponent {
   static propTypes = {
     todos: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         name: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
     updateTodoCompleted: PropTypes.func.isRequired,
-    updateTodoName: PropTypes.func.isRequired
+    updateTodoName: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.getTodos();
   }
 
-  handleCompletedUpdate = id => {
-    this.props.updateTodoCompleted(id);
-    toast("Completed!", {
-      toastId: 3,
-      type: toast.TYPE.SUCCESS
-    });
+  handleCompletedUpdate = (id, completed) => {
+    this.props.updateTodoCompleted(id, completed);
   };
 
   handleNameUpdate = (id, name) => {
     this.props.updateTodoName(id, name);
-    toast("Updated!", {
-      toastId: 7,
-      type: toast.TYPE.SUCCESS
-    });
+  };
+
+  handleDeleteTodo = id => {
+    this.props.deleteTodo(id);
   };
 
   render() {
@@ -56,6 +53,7 @@ class TodoList extends React.PureComponent {
               {...todo}
               onUpdateTodoCompleted={this.handleCompletedUpdate}
               onUpdateTodoName={this.handleNameUpdate}
+              onDeleteTodo={this.handleDeleteTodo}
             />
           ))
         ) : (
@@ -73,7 +71,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getTodos,
   updateTodoCompleted,
-  updateTodoName
+  updateTodoName,
+  deleteTodo
 };
 
 export default connect(

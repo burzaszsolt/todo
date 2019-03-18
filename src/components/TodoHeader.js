@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { addTodo, clearTodos } from "../actions/thunks";
+import { addTodo, clearTodos, deleteAllTodos } from "../actions/thunks";
 import { getCompletedTodosCount } from "../selectors";
 
 class TodoHeader extends React.PureComponent {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
-    clearTodos: PropTypes.func.isRequired
+    clearTodos: PropTypes.func.isRequired,
+    deleteAllTodos: PropTypes.func.isRequired
   };
 
   state = {
@@ -22,32 +23,28 @@ class TodoHeader extends React.PureComponent {
   handleClick = () => {
     if (!this.state.value.length) {
       toast("Name cannot be empty!", {
-        toastId: 2,
+        toastId: Symbol(),
         type: toast.TYPE.ERROR
       });
       return;
     }
     this.props.addTodo(this.state.value);
     this.setState({ value: "" });
-    toast("TODO created!", {
-      toastId: 1,
-      type: toast.TYPE.SUCCESS
-    });
   };
 
   handleClear = () => {
     if (!this.props.completedTodosCount) {
       toast("There aren't any completed todos, nothing to clear!", {
-        toastId: 5,
+        toastId: Symbol(),
         type: toast.TYPE.WARNING
       });
       return;
     }
     this.props.clearTodos();
-    toast("Completed todos cleared", {
-      toastId: 6,
-      type: toast.TYPE.SUCCESS
-    });
+  };
+
+  handleDeleteAll = () => {
+    this.props.deleteAllTodos();
   };
 
   render() {
@@ -78,6 +75,13 @@ class TodoHeader extends React.PureComponent {
         >
           Clear
         </button>
+        <button
+          className="btn btn-danger ml-2"
+          type="button"
+          onClick={this.handleDeleteAll}
+        >
+          Delete All
+        </button>
       </div>
     );
   }
@@ -89,7 +93,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addTodo,
-  clearTodos
+  clearTodos,
+  deleteAllTodos
 };
 
 export default connect(

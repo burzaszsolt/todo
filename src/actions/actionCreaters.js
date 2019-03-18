@@ -1,20 +1,23 @@
 import {
-  GET_TODOS,
   ADD_TODO,
   UPDATE_TODO_NAME,
   UPDATE_TODO_COMPLETED,
   CLEAR_TODOS,
-  SEARCH_TODO
+  SEARCH_TODO,
+  RESOLVE_TODO,
+  RESOLVE_TODOS,
+  DELETE_TODO,
+  DELETE_ALL_TODOS
 } from "./actionNames";
 
-export function getTodos(todos) {
-  return {
-    type: GET_TODOS,
-    payload: {
-      todos
-    }
-  };
-}
+// export function getTodos(todos) {
+//   return {
+//     type: GET_TODOS,
+//     payload: {
+//       todos
+//     }
+//   };
+// }
 
 export function addTodo(name) {
   return {
@@ -54,7 +57,40 @@ export function searchTodo(search) {
   return {
     type: SEARCH_TODO,
     payload: {
-      search: search
+      search
     }
+  };
+}
+
+export function resolveTodo(todo) {
+  return {
+    type: RESOLVE_TODO,
+    payload: {
+      todo
+    }
+  };
+}
+
+export function resolveTodos(todos) {
+  return {
+    type: RESOLVE_TODOS,
+    payload: {
+      todos
+    }
+  };
+}
+
+export function deleteTodo(id) {
+  return {
+    type: DELETE_TODO,
+    payload: {
+      id
+    }
+  };
+}
+
+export function deleteAllTodos() {
+  return {
+    type: DELETE_ALL_TODOS
   };
 }

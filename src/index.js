@@ -10,12 +10,14 @@ import reducer from "./reducers";
 import thunk from "redux-thunk";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { localStorageApi } from "./localStorageApi";
+import api from "./api";
 
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument({ localStorageApi }))
+    applyMiddleware(thunk.withExtraArgument({ localStorageApi, api, toast }))
   )
 );
 
