@@ -22,7 +22,7 @@ export default class TodoItem extends React.PureComponent {
   };
 
   handleCompletedChange = () => {
-    this.props.onUpdateTodoCompleted(this.props.id, this.props.completed);
+    this.props.onUpdateTodoCompleted(this.props.id);
   };
 
   handleNameChange = evt => {

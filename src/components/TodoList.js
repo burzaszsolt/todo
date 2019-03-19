@@ -29,8 +29,8 @@ class TodoList extends React.PureComponent {
     this.props.getTodos();
   }
 
-  handleCompletedUpdate = (id, completed) => {
-    this.props.updateTodoCompleted(id, completed);
+  handleCompletedUpdate = (id) => {
+    this.props.updateTodoCompleted(id);
   };
 
   handleNameUpdate = (id, name) => {

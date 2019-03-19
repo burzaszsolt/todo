@@ -38,14 +38,15 @@ export const addTodo = name => async (
   }
 };
 
-export const updateTodoCompleted = (id, completed) => async (
+export const updateTodoCompleted = (id) => async (
   dispatch,
   getState,
   { localStorageApi, api, toast }
 ) => {
   try {
+    const prevTodo = getTodos(getState()).find(todo => todo.id === id);
     const todo = await api.put(`/todos/${id}`, {
-      body: { completed: !completed }
+      body: { completed: !prevTodo.completed }
     });
     dispatch(actions.resolveTodo(todo));
     toast("Completed!", {
