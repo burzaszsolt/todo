@@ -111,7 +111,7 @@ export const deleteAllTodos = () => async (
 ) => {
   try {
     await api.delete(`/todos/all`);
-    dispatch(actions.deleteAllTodos());
+    dispatch(actions.deleteAllTodos()); // TODO: use resolveTodos
     toast("All todos deleted", {
       toastId: Symbol(),
       type: toast.TYPE.SUCCESS
