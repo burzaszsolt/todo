@@ -20,13 +20,21 @@
 }
 
 .content {
-  top: 120px;
+  height: 100%;
   width: 100%;
   position: absolute;
   background-color: #282c34;
 }
 
+.home {
+  position: relative;
+  top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .todos {
+  top: 120px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -37,4 +45,37 @@
 
 .active {
   color: #4da3ff;
+}
+
+.login {
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 10px;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login h1 {
+  color: #007bff;
+}
+
+.login input {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }

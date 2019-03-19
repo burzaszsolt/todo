@@ -2,7 +2,6 @@ import React from "react";
 import TodoHeader from "./TodoHeader";
 import TodoFooter from "./TodoFooter";
 import TodoList from "./TodoList";
-import { ToastContainer } from "react-toastify";
 export default class Todos extends React.PureComponent {
   render() {
     return (
@@ -10,7 +9,6 @@ export default class Todos extends React.PureComponent {
         <TodoHeader />
         <TodoList />
         <TodoFooter />
-        <ToastContainer />
       </div>
     );
   }

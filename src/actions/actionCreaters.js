@@ -7,7 +7,8 @@ import {
   RESOLVE_TODO,
   RESOLVE_TODOS,
   DELETE_TODO,
-  DELETE_ALL_TODOS
+  DELETE_ALL_TODOS,
+  LOGIN
 } from "./actionNames";
 
 // export function getTodos(todos) {
@@ -92,5 +93,11 @@ export function deleteTodo(id) {
 export function deleteAllTodos() {
   return {
     type: DELETE_ALL_TODOS
+  };
+}
+
+export function login() {
+  return {
+    type: LOGIN
   };
 }

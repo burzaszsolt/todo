@@ -144,3 +144,22 @@ export const clearTodos = () => async (
     });
   }
 };
+
+export const login = () => (
+  dispatch,
+  getState,
+  { localStorageApi, api, toast }
+) => {
+  try {
+    toast("Login", {
+      toastId: Symbol(),
+      type: toast.TYPE.SUCCESS
+    });
+    dispatch(actions.login());
+  } catch (err) {
+    toast("Hiba a bejelentkezés során", {
+      toastId: Symbol(),
+      type: toast.TYPE.ERROR
+    });
+  }
+};
